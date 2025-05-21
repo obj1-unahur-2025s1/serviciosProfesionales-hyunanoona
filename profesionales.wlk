@@ -1,18 +1,3 @@
-class empresa {
-  var contratados = []
-  var honorarioReferencia
-  var universidadesFormadoras = #{}
-
-  method cuantosContratadosEstudiaronEn(unaUniversidad) = contratados.filter{c => c.universidad() == unaUniversidad}.size()
-
-  method profesionalesCaros() = contratados.filter{c => c.honorarios() > honorarioReferencia}
-
-  method universidadesFormadoras() {
-    var listaAux = #{}
-    listaAux.addAll{contratados.forEach{c => c.universidad()}}
-    return listaAux
-  }
-}
 
 class ProfesionalUniversidad {
   var universidad
