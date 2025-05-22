@@ -1,23 +1,22 @@
 
-class ProfesionalUniversidad {
+class ProfesionalVinculados {
   var universidad
 
   method universidad() = universidad
 
   method honorarios() =  universidad.honorariosRecomendados() 
 
-  method puedeTrabajarEn() = universidad.provincia()
+  method puedeTrabajarEn() = universidad.provincia().asSet()
 }
 
 class ProfesionalLitoral {
-  const provincias = [corrientes, entreRios, santaFe]
   var universidad
 
   method universidad() = universidad
 
   method honorarios() = 3000 
 
-  method puedeTrabajarEn(unaProvincia) = provincias.any{p => p == unaProvincia} 
+  method puedeTrabajarEn() = #{corrientes, entreRios, santaFe}
 }
 
 class ProfesionalesLibres {
@@ -32,8 +31,10 @@ class ProfesionalesLibres {
   method honorarios() = honorarios
 }
 
-object corrientes{}
+  object corrientes{}
 
-object entreRios{}
+  object entreRios{}
 
-object santaFe{}
+  object santaFe{}
+
+  object buenosAires{}

@@ -8,4 +8,8 @@ class empresa {
   method profesionalesCaros() = contratados.filter{c => c.honorarios() > honorarioReferencia}
 
   method universidadesFormadoras() = contratados.map{c => c.universidad()}.asSet()
+
+  method profesionalMasBarato() = contratados.min{c => c.honorarios()}
+
+  method esDeGenteAcotada() = contratados.all{c => c.provincias().size() <= 3}
 }
