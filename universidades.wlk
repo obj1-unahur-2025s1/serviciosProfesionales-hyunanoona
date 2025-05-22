@@ -1,4 +1,4 @@
-class Universidades{
+class Universidad{
     var provincia
     var honorariosRecomendados 
 

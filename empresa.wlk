@@ -1,7 +1,8 @@
-class empresa {
-  var contratados = []
+class Empresa {
+  var contratados = #{}
   var honorarioReferencia
-  var universidadesFormadoras = #{}
+
+  method contratar(unEmpleado) = contratados.add(unEmpleado)
 
   method cuantosContratadosEstudiaronEn(unaUniversidad) = contratados.filter{c => c.universidad() == unaUniversidad}.size()
 

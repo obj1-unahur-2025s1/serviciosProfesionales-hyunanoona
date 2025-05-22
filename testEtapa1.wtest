@@ -1,0 +1,41 @@
+import empresa.*
+import profesionales.*
+import universidades.*
+describe "quiero morir" {
+
+  var unsam = new Universidad(honorariosRecomendados = 3500, provincia = buenosAires)
+  var unr = new Universidad(honorariosRecomendados = 2800, provincia = santaFe)
+  var unne = new Universidad(honorariosRecomendados = 4200, provincia = corrientes)
+  var unahur = new Universidad(honorariosRecomendados = 8800, provincia = buenosAires)
+
+  var juana = new ProfesionalVinculado(universidad = unr)
+  var melina = new ProfesionalLitoral(universidad = unne)
+  var rocio = new ProfesionalLibre(universidad = unahur, honorarios = 5000, provincias = #{buenosAires, santaFe, cordoba})
+  var luciana = new ProfesionalLibre(universidad = unr, honorarios = 3200, provincias = #{santaFe, entreRios})
+
+  var empresaAlpha = new Empresa(honorarioReferencia = 3500)
+
+  method initialize() {
+    empresaAlpha.contratar(juana)
+    empresaAlpha.contratar(melina)
+    empresaAlpha.contratar(rocio)
+    empresaAlpha.contratar(luciana)
+  }
+
+  test "dos de sus profesionales estudiaron en Rosario, uno en Hurlingham, ninguno (o sea cero) en San Martín." {
+    assert.equals(0, empresaAlpha.cuantosContratadosEstudiaronEn(unsam))
+  }
+
+  test "el unico profesional caro es rocio" {
+    assert.equals(#{rocio}, empresaAlpha.profesionalesCaros())
+  }
+
+  test "las universidades formadoras son unr, unne y unahur" {
+    assert.equals(#{unr, unne, unahur}, empresaAlpha.universidadesFormadoras())
+  }
+
+  test "el profesional mas barato es juana" {
+    assert.equals(juana, empresaAlpha.profesionalMasBarato())
+  }
+
+}

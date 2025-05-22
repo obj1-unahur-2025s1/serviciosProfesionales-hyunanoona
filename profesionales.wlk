@@ -1,5 +1,5 @@
 
-class ProfesionalVinculados {
+class ProfesionalVinculado {
   var universidad
 
   method universidad() = universidad
@@ -19,14 +19,14 @@ class ProfesionalLitoral {
   method puedeTrabajarEn() = #{corrientes, entreRios, santaFe}
 }
 
-class ProfesionalesLibres {
+class ProfesionalLibre {
   var universidad 
   var provincias
   var honorarios
 
   method universidad() = universidad
 
-  method provincias() = provincias
+  method puedeTrabajarEn() = provincias
 
   method honorarios() = honorarios
 }
@@ -38,3 +38,5 @@ class ProfesionalesLibres {
   object santaFe{}
 
   object buenosAires{}
+
+  object cordoba{}
