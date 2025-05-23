@@ -13,4 +13,8 @@ class Empresa {
   method profesionalMasBarato() = contratados.min{c => c.honorarios()}
 
   method esDeGenteAcotada() = contratados.all{c => c.provincias().size() <= 3}
+
+  method puedeSatisfacer(unSolicitante) = contratados.any{c => unSolicitante.puedeSerAtendido(c)}
+
+  method darServicio(unSolicitante) = if (self.puedeSatisfacer(unSolicitante))
 }
