@@ -3,17 +3,18 @@ class Persona{
 
   method provincia() = provincia
 
-  method puedeSerAtendido(unProfesional) = unProfesional.provincia() == provincia
+  method puedeSerAtendido(unProfesional) = unProfesional.puedeTrabajarEn().contains(provincia)
 }
 
 class Institucion{
-    var universidadesReconocidas = #{}
+    var universidadesReconocidas 
 
     method puedeSerAtendido(unProfesional) = universidadesReconocidas.any{u => u == unProfesional.universidad()}
 }
 
 class Club{
-    var provincias = #{}
+    var provincias 
+    var provinciasdos
 
-    method puedeSerAtendido(unProfesional) = provincias.any{p=> p == unProfesional.provincia()}
+    method puedeSerAtendido(unProfesional) = not provincias.intersection(unProfesional.puedeTrabajarEn()).isEmpty()
 }

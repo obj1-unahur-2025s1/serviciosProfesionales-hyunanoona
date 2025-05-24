@@ -1,6 +1,7 @@
 import empresa.*
 import profesionales.*
 import universidades.*
+import solicitantes.*
 describe "quiero morir" {
 
   var unsam = new Universidad(honorariosRecomendados = 3500, provincia = buenosAires)
@@ -14,6 +15,12 @@ describe "quiero morir" {
   var luciana = new ProfesionalLibre(universidad = unr, honorarios = 3200, provincias = #{santaFe, entreRios})
 
   var empresaAlpha = new Empresa(honorarioReferencia = 3500)
+
+  var clubUno = new Club(provincias = #{cordoba}, provinciasdos = #{corrientes})
+
+  var mario = new Persona(provincia = cordoba)
+
+  var insgbr = new Institucion(universidadesReconocidas = #{unr, unahur})
 
   method initialize() {
     empresaAlpha.contratar(juana)
@@ -38,4 +45,15 @@ describe "quiero morir" {
     assert.equals(juana, empresaAlpha.profesionalMasBarato())
   }
 
+  test "el clubUno puede ser atendido por rocio" {
+    assert.that(clubUno.puedeSerAtendido(rocio))
+  }
+
+  test "mario no puede ser atendido por luciana" {
+    assert.notThat(mario.puedeSerAtendido(luciana))
+  }
+
+  test "insgbr puede ser atendido por juana"{
+    assert.that(insgbr.puedeSerAtendido(rocio))
+  }
 }

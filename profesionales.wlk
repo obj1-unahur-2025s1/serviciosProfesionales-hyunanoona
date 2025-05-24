@@ -6,7 +6,7 @@ class ProfesionalVinculado {
 
   method honorarios() =  universidad.honorariosRecomendados() 
 
-  method puedeTrabajarEn() = universidad.provincia().asSet()
+  method puedeTrabajarEn() = #{universidad.provincia()}
 
   method cobrar(unImporte) = universidad.recibirDonacion(unImporte*0.5)
 }
