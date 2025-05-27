@@ -20,23 +20,25 @@ class Empresa {
 
   method profesionalMasBarato() = contratados.min{c => c.honorarios()}
 
-  method esDeGenteAcotada() = contratados.all{c => c.provincias().size() <= 3}
+  method esDeGenteAcotada() = contratados.all{c => c.puedeTrabajarEn().size() <= 3}
 
-  method contratadosQuePuedenSatisfacer(unSolicitante) = contratados.filter{c => unSolicitante.puedeSerAtendido(c)}
+  method sePuedeSatisfacer(unSolicitante) = contratados.any{c => unSolicitante.puedeSerAtendido(c)}
   
-  method algunContratadoDisponible(unSolicitante) = self.contratadosQuePuedenSatisfacer(unSolicitante).anyOne()
-
-  method darServicio(unSolicitante) {
-    if (self.contratadosQuePuedenSatisfacer(unSolicitante)>1)
-        self.algunContratadoDisponible(unSolicitante).cobrar(self.algunContratadoDisponible(unSolicitante).honorarios())
-        clientes.add(unSolicitante)
+  method darServicio(unSolicitante){
+    if(self.sePuedeSatisfacer(unSolicitante)){
+      const profesional = contratados.find{c => unSolicitante.puedeSerAtendido(c)}
+      profesional.cobrar(profesional.honorarios())
+      clientes.add(unSolicitante)
+    }
   }
-
+  
   method cuantosClienteHay() = clientes
 
   method esSolicitanteUnCliente(unSolicitante) = clientes.contains(unSolicitante)
 
-  method provinciasCubiertas() = contratados.map{c => c.puedeTrabajarEn().union(provinciasCubiertas)}
-
- // method esPocoAtractiva(unProfesional) = contratados.forEach{c => c.provincia().contains()}
+  method esProfesionalPocoAtractivo(unProfesional){
+        const profesionalProvincias = unProfesional.puedeTrabajarEn().asSet()
+        const profesionalesConMismasProvincias = contratados.filter({p => p.puedeTrabajarEn().asSet() == profesionalProvincias})
+        return profesionalesConMismasProvincias.any({p => p.honorarios() < unProfesional.honorarios()})
+    }
 }

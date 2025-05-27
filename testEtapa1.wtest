@@ -13,6 +13,7 @@ describe "quiero morir" {
   var melina = new ProfesionalLitoral(universidad = unne)
   var rocio = new ProfesionalLibre(universidad = unahur, honorarios = 5000, provincias = #{buenosAires, santaFe, cordoba})
   var luciana = new ProfesionalLibre(universidad = unr, honorarios = 3200, provincias = #{santaFe, entreRios})
+  var toto = new ProfesionalVinculado(universidad = unahur)
 
   var empresaAlpha = new Empresa(honorarioReferencia = 3500)
 
@@ -45,6 +46,10 @@ describe "quiero morir" {
     assert.equals(juana, empresaAlpha.profesionalMasBarato())
   }
 
+  test "la empresa alpha es de gente acotada" {
+    assert.that(empresaAlpha.esDeGenteAcotada())
+  }
+
   test "el clubUno puede ser atendido por rocio" {
     assert.that(clubUno.puedeSerAtendido(rocio))
   }
@@ -55,5 +60,15 @@ describe "quiero morir" {
 
   test "insgbr puede ser atendido por juana"{
     assert.that(insgbr.puedeSerAtendido(rocio))
+  }
+
+  test "el club uno es atendido por rocio, por lo que ella cobra su honorario, que es 5000, y el club es añadido a la lista de clientes" {
+    empresaAlpha.darServicio(clubUno)
+    assert.equals(5000, rocio.dineroRecaudado())
+    assert.that(empresaAlpha.esSolicitanteUnCliente(clubUno))
+  }
+
+  test "toto es un profesional poco atractivo para la empresa" {
+    assert.notThat(empresaAlpha.esProfesionalPocoAtractivo(toto))
   }
 }

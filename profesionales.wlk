@@ -41,6 +41,8 @@ class ProfesionalLibre {
     dineroRecaudado -= unImporte
     unaPersona.cobrar(unImporte)
   }
+
+  method dineroRecaudado() = dineroRecaudado
 }
 
   object corrientes{}
